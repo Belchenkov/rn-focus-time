@@ -25,12 +25,12 @@ const styles = size => StyleSheet.create({
        alignItems: 'center',
        justifyContent: 'center',
        borderColor: "#fff",
-       borderWidth: 2
+       borderWidth: 2,
    },
     text: {
        color: "#fff",
        fontWeight: 'bold',
-       fontSize: size / 3
+       fontSize: size / 4
     }
 });
 
