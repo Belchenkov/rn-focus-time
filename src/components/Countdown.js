@@ -12,6 +12,7 @@ const formatTime = (time) => {
 const Countdown = ({
     minutes = 20,
     isPaused,
+    onProgress,
 }) => {
     const [millis, setMillis] = useState(minutesToMillis(minutes));
     const minute = Math.floor(millis / 1000 / 60) % 60;
@@ -24,7 +25,7 @@ const Countdown = ({
                 return time;
             }
             const timeLeft = time - 1000;
-            // timeLeft
+            onProgress(timeLeft / minutesToMillis(minutes));
             return timeLeft;
         })
     };
