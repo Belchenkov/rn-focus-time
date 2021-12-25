@@ -14,7 +14,7 @@ const Countdown = ({
     isPaused,
     onProgress,
 }) => {
-    const [millis, setMillis] = useState(minutesToMillis(minutes));
+    const [millis, setMillis] = useState(null);
     const minute = Math.floor(millis / 1000 / 60) % 60;
     const seconds = Math.floor(millis / 1000) % 60;
     const interval = useRef(null);
@@ -31,12 +31,19 @@ const Countdown = ({
     };
 
     useEffect(() => {
-        if (isPaused) return;
+        if (isPaused) {
+            if (interval.current) clearInterval(interval.current);
+            return;
+        }
 
         interval.current = setInterval(countDown, 1000);
 
         return () => clearInterval(interval.current);
     }, [isPaused])
+
+    useEffect(() => {
+        setMillis(minutesToMillis(minutes));
+    }, [minutes])
 
     return (
         <Text style={styles.text}>
