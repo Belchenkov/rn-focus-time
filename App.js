@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useKeepAwake } from 'expo-keep-awake';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
 
 import { colors } from "./src/utils/colors";
@@ -8,9 +7,17 @@ import Focus from "./src/features/focus/Focus";
 import Timer from "./src/features/timer/Timer";
 
 export default function App() {
-  useKeepAwake();
+  const [focusSubject, setFocusSubject] = useState(null);
+  const [focusHistory, setFocusHistory] = useState([]);
 
-  const [focusSubject, setFocusSubject] = useState('Music');
+  useEffect(() => {
+    if (focusHistory) {
+      setFocusHistory([
+          ...focusHistory,
+          focusSubject,
+      ])
+    }
+  }, [focusSubject])
 
   return (
     <View style={styles.container}>
