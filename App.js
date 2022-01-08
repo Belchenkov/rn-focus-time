@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useKeepAwake } from 'expo-keep-awake';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 import { colors } from "./src/utils/colors";
 import { spacing } from "./src/utils/sizes";
@@ -10,13 +10,17 @@ import Timer from "./src/features/timer/Timer";
 export default function App() {
   useKeepAwake();
 
-  const [focusSubject, setFocusSubject] = useState('gardening');
+  const [focusSubject, setFocusSubject] = useState('Music');
 
   return (
     <View style={styles.container}>
       {
         focusSubject
-            ? <Timer focusSubject={focusSubject} onTimerEnd={() => { setFocusSubject(null) }} />
+            ? <Timer
+                focusSubject={focusSubject}
+                onTimerEnd={() => {setFocusSubject(null)}}
+                clearSubject={() => setFocusSubject(null)}
+            />
             : <Focus addSubject={setFocusSubject} />
       }
     </View>

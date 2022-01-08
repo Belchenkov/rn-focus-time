@@ -13,7 +13,7 @@ const Countdown = ({
     minutes = 20,
     isPaused,
     onEnd,
-    onProgress,
+    onProgress
 }) => {
     const [millis, setMillis] = useState(null);
     const minute = Math.floor(millis / 1000 / 60) % 60;
