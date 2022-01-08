@@ -11,7 +11,7 @@ import RoundedButton from '../../components/RoundedButton';
 
 const DEFAULT_TIME = 1;
 
-const Timer = ({ focusSubject }) => {
+const Timer = ({ focusSubject, onTimerEnd }) => {
     useKeepAwake();
 
     const [minutes, setMinutes] = useState(DEFAULT_TIME);
@@ -31,9 +31,9 @@ const Timer = ({ focusSubject }) => {
     const vibrate = () => {
         if (Platform.OS === 'ios') {
             const interval = setInterval(() => Vibration.vibrate(), 1000);
-            setTimeout(() => clearInterval(interval), 10000);
+            setTimeout(() => clearInterval(interval), 5000);
         } else {
-            Vibration.vibrate(10000);
+            Vibration.vibrate(5000);
         }
     };
 
@@ -42,6 +42,7 @@ const Timer = ({ focusSubject }) => {
         setMinutes(DEFAULT_TIME);
         setProgress(1);
         setIsStarted(false);
+        onTimerEnd();
     };
 
     return (
