@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Platform, AsyncStorage } from 'react-native';
 
 import { colors } from "./src/utils/colors";
 import { spacing } from "./src/utils/sizes";
@@ -22,6 +22,34 @@ export default function App() {
   const onClear = () => {
     setFocusHistory([]);
   };
+
+  const loadFocusHistory = async () => {
+    try {
+      const history = await AsyncStorage.getItem('focusHistory');
+
+      if (history && JSON.parse(history).length) {
+        setFocusHistory(JSON.parse(history));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const saveFocusHistory = async () => {
+    try {
+      await AsyncStorage.setItem('focusHistory', JSON.stringify(focusHistory));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    loadFocusHistory();
+  }, [])
+
+  useEffect(() => {
+    saveFocusHistory();
+  }, [focusHistory])
 
   return (
     <View style={styles.container}>

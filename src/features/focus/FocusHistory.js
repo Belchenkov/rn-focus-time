@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { fontSizes, spacing } from "../../utils/sizes";
-import { colors } from "../../utils/colors";
 import RoundedButton from "../../components/RoundedButton";
 import HistoryItem from './HistoryItem';
 
