@@ -2,6 +2,7 @@ import React from 'react';
 import {
     StyleSheet,
     Text,
+    View,
     FlatList,
     SafeAreaView,
 } from 'react-native';
@@ -17,21 +18,31 @@ const FocusHistory = ({ focusHistory, onClear }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            {
-                !!focusHistory.length && (
-                    <>
-                        <Text style={styles.title}>Things we've focused on</Text>
-                        <FlatList
-                            data={focusHistory}
-                            renderItem={HistoryItem}
-                            style={styles.list}
-                            contentContainerStyle={styles.listContainerStyle}
-                        />
-                    </>
-                )
-            }
-        </SafeAreaView>
+        <>
+            <SafeAreaView style={styles.container}>
+                {
+                    !!focusHistory.length && (
+                        <>
+                            <Text style={styles.title}>Things we've focused on</Text>
+                            <FlatList
+                                data={focusHistory}
+                                renderItem={HistoryItem}
+                                style={styles.list}
+                                contentContainerStyle={styles.listContainerStyle}
+                            />
+                            <View style={styles.clearContainer}>
+                                <RoundedButton
+                                    size={75}
+                                    title="Clear"
+                                    onPress={() => onClear()}
+                                />
+                            </View>
+                        </>
+                    )
+                }
+            </SafeAreaView>
+        </>
+
     );
 };
 
@@ -50,6 +61,10 @@ const styles = StyleSheet.create({
     title: {
         color: 'white',
         fontSize: fontSizes.lg,
+    },
+    clearContainer: {
+        alignItems: 'center',
+        padding: spacing.md,
     }
 });
 
