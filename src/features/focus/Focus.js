@@ -31,7 +31,7 @@ const Focus = ({ addSubject }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: .5,
     },
     titleContainer: {
         flex: .5,

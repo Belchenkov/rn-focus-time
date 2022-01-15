@@ -15,7 +15,7 @@ export default function App() {
   const addFocusHistorySubjectWithState = (subject, status) => {
     setFocusHistory([
       ...focusHistory,
-      { subject, status },
+      { key: String(focusHistory.length + 1), subject, status },
     ])
   };
 
@@ -67,13 +67,13 @@ export default function App() {
                 }}
             />
             : (
-                <>
+                <View style={{ flex: 1 }}>
                   <Focus addSubject={setFocusSubject} />
                   <FocusHistory
                     focusHistory={focusHistory}
                     onClear={onClear}
                   />
-                </>
+                </View>
             )
       }
     </View>
